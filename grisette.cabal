@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.37.0.
+-- This file has been generated from package.yaml by hpack version 0.38.1.
 --
 -- see: https://github.com/sol/hpack
 
@@ -116,6 +116,7 @@ library
       Grisette.Internal.Core.Data.UnionBase
       Grisette.Internal.SymPrim.AlgReal
       Grisette.Internal.SymPrim.AllSyms
+      Grisette.Internal.SymPrim.Array
       Grisette.Internal.SymPrim.BV
       Grisette.Internal.SymPrim.FP
       Grisette.Internal.SymPrim.FunInstanceGen
@@ -147,6 +148,7 @@ library
       Grisette.Internal.SymPrim.Quantifier
       Grisette.Internal.SymPrim.SomeBV
       Grisette.Internal.SymPrim.SymAlgReal
+      Grisette.Internal.SymPrim.SymArray
       Grisette.Internal.SymPrim.SymBool
       Grisette.Internal.SymPrim.SymBV
       Grisette.Internal.SymPrim.SymFP
