@@ -42,6 +42,7 @@ import Grisette.Internal.SymPrim.Prim.Internal.Term
   , conTerm
   , typedConstantSymbol
   , symTerm
+  , pformatTerm
   , pattern ConTerm
   , pattern SelectTerm
   , pattern StoreTerm
@@ -51,7 +52,7 @@ import Grisette.Internal.SymPrim.Prim.Internal.Serialize ()
 import Grisette.Internal.Core.Data.Class.Solvable (Solvable (con, sym, conView), ssym)
 import GHC.Generics (Generic)
 import Language.Haskell.TH.Syntax (Lift)
-import Prelude (Maybe (Just, Nothing), (<$>), ($), (.))
+import Prelude (Show (show), Maybe (Just, Nothing), (<$>), ($), (.))
 
 newtype SymArray k v = SymArray { underlyingArrayTerm :: Term (Array (ConType k) (ConType v)) }
   deriving (Lift, NFData, Generic)
@@ -94,6 +95,9 @@ instance
   IsString (SymArray sk sv) where
   fromString = ssym . fromString
 
+instance Show (SymArray sk sv) where
+  show = pformatTerm . underlyingArrayTerm
+
 instance
   ( SupportedNonFuncPrim ck,
     SupportedNonFuncPrim cv,
@@ -101,8 +105,8 @@ instance
     LinkedRep cv sv
   ) =>
   Serial (SymArray sk sv) where
-  serialize = serialize . underlyingArrayTerm
-  deserialize = SymArray <$> deserialize
+  serialize = serialize . underlyingTerm
+  deserialize = wrapTerm <$> deserialize
 
 instance
   ( SupportedNonFuncPrim ck,
